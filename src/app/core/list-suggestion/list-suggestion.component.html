@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2>Liste des suggestions</h2>
+   <button class="btn btn-success" routerLink="/suggestions/add">
+      ➕ Ajouter une Suggestion
+    </button>
+
+  <!-- Search Bar -->
+  <div class="mb-3">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Rechercher par titre ou catégorie..."
+      [(ngModel)]="searchTerm"
+      (input)="filterSuggestions()">
+  </div>
+
+  <!-- Suggestions List -->
+  <div class="suggestion-list">
+    <div *ngFor="let suggestion of filteredSuggestions" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ suggestion.title }}</h5>
+        <div class="d-flex justify-content-between text-muted mb-2">
+          <span class="badge bg-secondary">{{ suggestion.category }}</span>
+          <small>{{ suggestion.date | date:'dd MMM yyyy' }}</small>
+        </div>
+        <p class="card-text">{{ suggestion.description }}</p>
+        
+        <div class="d-flex justify-content-between align-items-center">
+          <span 
+            class="badge" 
+            [ngClass]="getStatusClass(suggestion.status)">
+            {{ getStatusText(suggestion.status) }}
+          </span>
+          
+          <div *ngIf="suggestion.status !== 'refusee'">
+            <button 
+              class="btn btn-outline-primary btn-sm me-2"
+              (click)="likeSuggestion(suggestion)">
+              Like
+            </button>
+            <button 
+              class="btn btn-outline-success btn-sm"
+              (click)="addToFavorites(suggestion)">
+              Ajouter aux favoris
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

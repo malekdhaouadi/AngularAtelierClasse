@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h3 class="mb-0">Ajouter une Suggestion</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="suggestionForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Title Field -->
+            <div class="mb-3">
+              <label for="title" class="form-label">Titre *</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="title"
+                formControlName="title"
+                [class.is-invalid]="isFieldInvalid('title')"
+                placeholder="Titre de votre suggestion">
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('title')">
+                {{ getFieldError('title') }}
+              </div>
+            </div>
+
+            <!-- Category Field -->
+            <div class="mb-3">
+              <label for="category" class="form-label">Catégorie *</label>
+              <select 
+                class="form-select" 
+                id="category"
+                formControlName="category"
+                [class.is-invalid]="isFieldInvalid('category')">
+                <option value="">Choisir une catégorie</option>
+                <option *ngFor="let category of categories" [value]="category">
+                  {{ category }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('category')">
+                {{ getFieldError('category') }}
+              </div>
+            </div>
+
+            <!-- Description Field -->
+            <div class="mb-3">
+              <label for="description" class="form-label">Description *</label>
+              <textarea 
+                class="form-control" 
+                id="description"
+                formControlName="description"
+                [class.is-invalid]="isFieldInvalid('description')"
+                rows="5"
+                placeholder="Décrivez votre suggestion en détail..."></textarea>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('description')">
+                {{ getFieldError('description') }}
+              </div>
+              <div class="form-text">
+                Minimum 20 caractères requis
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success" [disabled]="suggestionForm.invalid">
+                ✅ Soumettre la Suggestion
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="suggestionForm.reset()">
+                🔄 Réinitialiser
+              </button>
+              <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/suggestions'])">
+                ← Retour
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

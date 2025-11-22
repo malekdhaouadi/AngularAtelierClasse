@@ -1,0 +1,8 @@
+.suggestion-list .card {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.suggestion-list .card:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}

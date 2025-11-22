@@ -1,0 +1,57 @@
+<div class="container mt-4">
+  <div class="card" *ngIf="suggestion; else notFound">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Détails de la Suggestion</h2>
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">{{ suggestion.title }}</h3>
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Catégorie:</strong>
+          <span class="badge bg-secondary ms-2">{{ suggestion.category }}</span>
+        </div>
+        <div class="col-md-6">
+          <strong>Statut:</strong>
+          <span class="badge ms-2" [ngClass]="getStatusClass(suggestion.status)">
+            {{ getStatusText(suggestion.status) }}
+          </span>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-12">
+          <strong>Date de soumission:</strong>
+          <span class="ms-2">{{ suggestion.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <strong>Description:</strong>
+        <p class="mt-2 p-3 bg-light rounded">{{ suggestion.description }}</p>
+      </div>
+      
+      <div class="d-flex gap-2">
+        <button class="btn btn-secondary" (click)="backToList()">
+          ← Retour à la liste
+        </button>
+        <button class="btn btn-primary" *ngIf="suggestion.status !== 'refusee'">
+          👍 Like
+        </button>
+        <button class="btn btn-outline-primary" *ngIf="suggestion.status !== 'refusee'">
+          ⭐ Ajouter aux favoris
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <div class="alert alert-warning text-center">
+      <h4>Suggestion non trouvée</h4>
+      <p>La suggestion avec l'ID {{ suggestionId }} n'existe pas.</p>
+      <button class="btn btn-secondary" (click)="backToList()">
+        ← Retour à la liste
+      </button>
+    </div>
+  </ng-template>
+</div>
