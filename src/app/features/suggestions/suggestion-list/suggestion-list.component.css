@@ -1,0 +1,157 @@
+/* Fixed Status Badge */
+.status-badge {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Fixed Details Button */
+.btn-details {
+  border: 2px solid #4361ee;
+  color: #4361ee;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-details:hover {
+  background: #4361ee;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+}
+
+.btn-details:active {
+  transform: translateY(0);
+}
+
+/* Enhanced Card Styles */
+.suggestion-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  background: white;
+  position: relative;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Gradient Headers - Enhanced */
+.card-header-gradient {
+  padding: 1rem 1.5rem;
+  border: none;
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.gradient-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Category Badge */
+.category-badge {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* Engagement Stats */
+.engagement-stats {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.engagement-stats small {
+  background: rgba(255,255,255,0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Modern Button Styles */
+.btn-modern {
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+  color: white;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+}
+
+/* Empty State */
+.empty-state {
+  padding: 3rem 1rem;
+}
+
+.empty-state i {
+  opacity: 0.5;
+}
+
+/* Pulse Animation */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .suggestion-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-header-gradient {
+    padding: 0.75rem 1rem;
+  }
+  
+  .btn-details {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

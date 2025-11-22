@@ -1,57 +1,87 @@
-<div class="container mt-4">
-  <div class="card" *ngIf="suggestion; else notFound">
-    <div class="card-header bg-primary text-white">
-      <h2 class="mb-0">Détails de la Suggestion</h2>
-    </div>
-    <div class="card-body">
-      <h3 class="card-title">{{ suggestion.title }}</h3>
-      
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <strong>Catégorie:</strong>
-          <span class="badge bg-secondary ms-2">{{ suggestion.category }}</span>
+<div class="container mt-5 pt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="modern-card">
+        <!-- Header -->
+        <div class="card-header" [ngClass]="{
+          'bg-success': suggestion?.status === 'acceptee',
+          'bg-danger': suggestion?.status === 'refusee',
+          'bg-warning': suggestion?.status === 'en_attente'
+        }">
+          <div class="d-flex justify-content-between align-items-center text-white">
+            <h3 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Détails de la Suggestion</h3>
+            <span class="badge bg-light text-dark">
+              {{ getStatusText(suggestion?.status || '') }}
+            </span>
+          </div>
         </div>
-        <div class="col-md-6">
-          <strong>Statut:</strong>
-          <span class="badge ms-2" [ngClass]="getStatusClass(suggestion.status)">
-            {{ getStatusText(suggestion.status) }}
-          </span>
+
+        <div class="card-body" *ngIf="suggestion; else notFound">
+          <!-- Title -->
+          <h2 class="card-title text-dark fw-bold mb-4">{{ suggestion.title }}</h2>
+          
+          <!-- Meta Information -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="info-item">
+                <i class="fas fa-tag text-primary me-2"></i>
+                <strong>Catégorie:</strong>
+                <span class="badge bg-primary ms-2">{{ suggestion.category }}</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-item">
+                <i class="fas fa-calendar text-primary me-2"></i>
+                <strong>Date:</strong>
+                <span class="ms-2">{{ suggestion.date | date:'dd MMMM yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Description -->
+          <div class="description-section mb-4">
+            <h5 class="fw-bold text-dark mb-3">
+              <i class="fas fa-align-left text-primary me-2"></i>Description
+            </h5>
+            <div class="p-4 bg-light rounded-3">
+              <p class="mb-0 lead">{{ suggestion.description }}</p>
+            </div>
+          </div>
+          
+          <!-- Actions - THIS IS THE SECTION TO REPLACE -->
+          <div class="action-buttons d-flex gap-2 flex-wrap">
+            <button class="btn btn-secondary btn-modern" (click)="backToList()">
+              <i class="fas fa-arrow-left me-2"></i>Retour à la liste
+            </button>
+            <button 
+              class="btn btn-success btn-modern" 
+              *ngIf="suggestion.status !== 'refusee'"
+              (click)="likeSuggestion()">
+              <i class="fas fa-thumbs-up me-2"></i>Like ({{ suggestion.likes || 0 }})
+            </button>
+            <button 
+              class="btn btn-outline-primary btn-modern" 
+              *ngIf="suggestion.status !== 'refusee'"
+              (click)="toggleFavorite()">
+              <i class="fas fa-star me-2"></i>Favoris ({{ suggestion.favorites || 0 }})
+            </button>
+            <button class="btn btn-outline-info btn-modern">
+              <i class="fas fa-share me-2"></i>Partager
+            </button>
+          </div>
         </div>
-      </div>
-      
-      <div class="row mb-3">
-        <div class="col-12">
-          <strong>Date de soumission:</strong>
-          <span class="ms-2">{{ suggestion.date | date:'dd/MM/yyyy' }}</span>
-        </div>
-      </div>
-      
-      <div class="mb-4">
-        <strong>Description:</strong>
-        <p class="mt-2 p-3 bg-light rounded">{{ suggestion.description }}</p>
-      </div>
-      
-      <div class="d-flex gap-2">
-        <button class="btn btn-secondary" (click)="backToList()">
-          ← Retour à la liste
-        </button>
-        <button class="btn btn-primary" *ngIf="suggestion.status !== 'refusee'">
-          👍 Like
-        </button>
-        <button class="btn btn-outline-primary" *ngIf="suggestion.status !== 'refusee'">
-          ⭐ Ajouter aux favoris
-        </button>
+
+        <ng-template #notFound>
+          <div class="card-body text-center py-5">
+            <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+            <h4 class="text-dark">Suggestion non trouvée</h4>
+            <p class="text-muted">La suggestion que vous recherchez n'existe pas ou a été supprimée.</p>
+            <button class="btn btn-gradient btn-modern" (click)="backToList()">
+              <i class="fas fa-arrow-left me-2"></i>Retour aux suggestions
+            </button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
-
-  <ng-template #notFound>
-    <div class="alert alert-warning text-center">
-      <h4>Suggestion non trouvée</h4>
-      <p>La suggestion avec l'ID {{ suggestionId }} n'existe pas.</p>
-      <button class="btn btn-secondary" (click)="backToList()">
-        ← Retour à la liste
-      </button>
-    </div>
-  </ng-template>
 </div>
